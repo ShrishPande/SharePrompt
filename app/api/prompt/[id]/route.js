@@ -8,7 +8,7 @@ export const GET = async (request, { params }) => {
     if (!prompt) return new Response("prompt nor found", { status: 404 });
     return new Response(JSON.stringify(prompt), { status: 200 });
   } catch (error) {
-    return new Response("Failed to fetch all prompts", { status: 500 });
+    return new Response("failed to fetch all prompts", { status: 500 });
   }
 };
 
@@ -19,14 +19,14 @@ export const PATCH = async (request, { params }) => {
     await connectToDB();
     const existringPrompt = await Prompt.findById(params.id);
     if (!existringPrompt)
-      return new Response("Prompt not found", { staus: 404 });
+      return new Response("prompt not found", { staus: 404 });
 
     existringPrompt.prompt = prompt;
     existringPrompt.tag = tag;
     await existringPrompt.save();
     return new Response(JSON.stringify(existringPrompt), { status: 200 });
   } catch (error) {
-    return new Response("Failed to update prompt", {
+    return new Response("failed to update prompt", {
       status: 500,
     });
   }
@@ -39,8 +39,8 @@ export const DELETE = async (request, { params }) => {
       // Find the prompt by ID and remove it
       await Prompt.findByIdAndRemove(params.id);
 
-      return new Response("Prompt deleted successfully", { status: 200 });
+      return new Response("prompt deleted successfully", { status: 200 });
   } catch (error) {
-      return new Response("Error deleting prompt", { status: 500 });
+      return new Response("error deleting prompt", { status: 500 });
   }
 };

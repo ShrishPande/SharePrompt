@@ -8,6 +8,6 @@ export const GET = async(request)=>{
         return new Response(JSON.stringify(prompts),{status:200})
 
     }catch(error){
-        return new Response({message:"Failed to fetch all prompts"},{status:500})
+        return new Response("failed to fetch all the prompts ....",{status:500})
     }
 }
